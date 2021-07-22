@@ -24,6 +24,7 @@ const ValueButton = styled(ResetButton)`
   align-items: center;
   border-radius: 4px;
   font-weight: 600;
+  color: ${colors.dark_grey};
   &:hover:focus:active {
     background-color: ${colors.very_light_grey};
   }

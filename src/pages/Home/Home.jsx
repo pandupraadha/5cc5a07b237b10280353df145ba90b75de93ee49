@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import Calendar from "../../container/Calendar/Calendar"
 import TopNav from "../../container/TopNav/TopNav"
 
 const Container = styled.div`
@@ -12,7 +13,7 @@ const Home = () => {
     <Container>
       <TopNav />
 
-      {/* calendar */}
+      <Calendar />
 
       {/* content */}
     </Container>
