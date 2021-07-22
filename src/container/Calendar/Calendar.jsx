@@ -1,15 +1,23 @@
 import moment from "moment"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import styled from "styled-components"
 import CalendarDate from "../../components/CalendarDate/CalendarDate"
+import { colors } from "../../helper/colors"
 
 const Container = styled.div`
+  height: 50px;
   display: flex;
   flex-wrap: no-wrap;
-  overflow-y: hidden;
-  overflow-x: scroll;
+  overflow-y: visible;
+  overflow-x: auto;
   scroll-snap-type: x mandatory;
-
+  background-color: white;
+  border-bottom: 1px solid ${colors.very_light_grey};
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `
 
 const WeekContainer  = styled.div`
@@ -26,12 +34,6 @@ const days = ['SEN', 'SEL', 'RAB', 'KAM', 'JUM', 'SAB', 'MIN']
 
 const Calendar = () => {
   const [activeDate, setActiveDate] = useState(moment().day())
-
-
-  useEffect(() => {
-    console.log( moment().add(1 - moment().day(), 'days').date()  );
-  }, [])
-
   return (
     <Container>
       {week.map(day => 
@@ -45,7 +47,6 @@ const Calendar = () => {
               disabled={item === 7 || item === 6}
               key={item}
               onClick={() => {
-                console.log('clicked');
                 setActiveDate(item + (10 * day))
               }}
             />

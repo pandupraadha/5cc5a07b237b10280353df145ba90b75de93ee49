@@ -4,6 +4,7 @@ import Location from "../../components/Location/Location"
 
 const Container = styled.div`
   display: flex;
+  background-color: white;
 `
 
 const TopNav = () => {
