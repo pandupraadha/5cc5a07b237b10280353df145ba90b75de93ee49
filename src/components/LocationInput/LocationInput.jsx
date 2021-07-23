@@ -1,6 +1,7 @@
 import styled from "styled-components"
 import { MdLocationOn } from "react-icons/md"
 import { colors } from "../../helper/colors"
+import { useState } from "react"
 
 const Container = styled.div`
   width: 100%;
@@ -24,11 +25,18 @@ const Input = styled.input`
 
 
 const LocationInput = (props) => {
-  const {value, onChange} = props
+  const {onChange} = props
+  const [input, setInput] = useState('')
+
+  function handleChange(e){
+    const val = e.target.value
+    if (val.length > 2 || val.length === 0) onChange(val)
+    setInput(val)
+  }
   return (
     <Container>
       <MdLocationOn size={24} color={colors.red} />
-      <Input type="text" value={value} onChange={onChange} />
+      <Input type="text" value={input} onChange={handleChange} />
     </Container>
   )
 }

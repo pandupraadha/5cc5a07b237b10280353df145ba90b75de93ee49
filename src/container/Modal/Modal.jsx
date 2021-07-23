@@ -1,3 +1,4 @@
+import _ from "lodash"
 import { useState } from "react"
 import { MdClose } from "react-icons/md"
 import { useDispatch } from "react-redux"
@@ -85,7 +86,7 @@ const Modal = (props) => {
   }
 
   if (show) return (
-    <Container onClick={handleCloseModal} >
+    <Container>
       <Card>
         <CardHeader>
           <Title>
@@ -96,10 +97,10 @@ const Modal = (props) => {
           </CloseButton>
         </CardHeader>
         <CardHeader>
-          <LocationInput value={input} onChange={e => setInput(e.target.value)} />
+          <LocationInput onChange={val => setInput(val)} />
         </CardHeader>
         <CardBody>
-          {data.map((item, index) => 
+          {data.filter(item => _.includes(item.name.toLowerCase(), input.toLowerCase()) ).map((item, index) => 
             <LocationItem data={item} key={index} onClick={() => handleSelectAddress(item)} />
           )}
         </CardBody>
