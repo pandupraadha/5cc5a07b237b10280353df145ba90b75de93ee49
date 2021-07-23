@@ -96,7 +96,7 @@ const Modal = (props) => {
           </CloseButton>
         </CardHeader>
         <CardHeader>
-          <LocationInput />
+          <LocationInput value={input} onChange={e => setInput(e.target.value)} />
         </CardHeader>
         <CardBody>
           {data.map((item, index) => 

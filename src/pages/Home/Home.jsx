@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react"
 import { useSelector } from 'react-redux'
+import { useMediaQuery } from "react-responsive"
 import styled from "styled-components"
+import Cart from "../../components/Cart/Cart"
 import Type from "../../components/Type/Type"
 import Calendar from "../../container/Calendar/Calendar"
 import Content from "../../container/Content/Content"
@@ -23,7 +25,14 @@ const Top = styled.div`
   z-index: 10;
 `
 
+const DesktopWarning = styled(Container)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+
 const Home = () => {
+  const isDesktop = useMediaQuery({ minWidth: 480 })
   const showLocation = useSelector(state => state.location.showModal)
   const [show, setShow] = useState(true)
   useEffect(() => {
@@ -41,7 +50,12 @@ const Home = () => {
     }
   }, [])
 
-  return (
+  if (isDesktop) return (
+    <DesktopWarning>
+      Mode desktop masih dalam tahap pengerjaan, mohon buka website ini di smartphone anda. 
+    </DesktopWarning>
+  )
+  else return (
     <Container>
       <Top>
         <TopNav />
@@ -51,6 +65,7 @@ const Home = () => {
 
       <Content />
       <Modal show={showLocation} />
+      <Cart />
     </Container>
   )
 }

@@ -3,6 +3,9 @@ import { colors } from "../../helper/colors"
 import { MdStar, MdStarHalf, MdStarBorder } from "react-icons/md";
 import currency from 'currency.js'
 import { ResetButton } from "../../helper/resetStyling";
+import { useDispatch, useSelector } from "react-redux";
+import { addItem } from "../../redux/cart/cartSlice";
+import _ from "lodash";
 
 
 const Container = styled.div`
@@ -83,10 +86,15 @@ const AddCart = styled(ResetButton)`
   color: white;
   border-radius: 4px;
   font-weight: 600;
+  &:disabled {
+  background-color: ${colors.light_grey};
+  }
 `
 
 const ContentCard = (props) => {
   const {data} = props
+  const cartItems = useSelector(state => state.cart.item)
+  const dispatch = useDispatch()
 
   function renderRating(){
     const iconProps = {
@@ -103,6 +111,7 @@ const ContentCard = (props) => {
       rating--
     }
 
+
     return (
       <Rating>
         <RatingValue>
@@ -112,6 +121,12 @@ const ContentCard = (props) => {
       </Rating>
     )
   }
+
+  function handleAddCart() {
+    if (cartItems.includes(data)) return
+    dispatch(addItem(data))
+  }
+
   return (
     <Container>
       <ImageContainer>
@@ -129,7 +144,7 @@ const ContentCard = (props) => {
           <Price>
             {currency(data.price, {symbol: `IDR `, decimal: ',', separator: '.', precision: 0 }).format()}
           </Price>
-          <AddCart>
+          <AddCart onClick={handleAddCart} disabled={cartItems.includes(data)}>
             ADD +
           </AddCart>
         </Footer>

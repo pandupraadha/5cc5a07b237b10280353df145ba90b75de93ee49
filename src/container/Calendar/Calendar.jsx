@@ -1,8 +1,10 @@
 import moment from "moment"
 import { useState } from "react"
+import { useDispatch } from "react-redux"
 import styled from "styled-components"
 import CalendarDate from "../../components/CalendarDate/CalendarDate"
 import { colors } from "../../helper/colors"
+import { setDate } from "../../redux/date/dateSlice"
 
 const Container = styled.div`
   height: 50px;
@@ -34,6 +36,7 @@ const days = ['SEN', 'SEL', 'RAB', 'KAM', 'JUM', 'SAB', 'MIN']
 
 const Calendar = () => {
   const [activeDate, setActiveDate] = useState(moment().day())
+  const dispatch = useDispatch()
   return (
     <Container>
       {week.map(day => 
@@ -47,6 +50,9 @@ const Calendar = () => {
               disabled={item === 7 || item === 6}
               key={item}
               onClick={() => {
+                // console.log(moment().add(item + (10 * day) - moment().day(), 'days'));
+                // console.log(moment());
+                dispatch(setDate(moment().add(item + (10 * day) - moment().day(), 'days').toDate()))
                 setActiveDate(item + (10 * day))
               }}
             />

@@ -23,11 +23,12 @@ const Input = styled.input`
 `
 
 
-const LocationInput = () => {
+const LocationInput = (props) => {
+  const {value, onChange} = props
   return (
     <Container>
       <MdLocationOn size={24} color={colors.red} />
-      <Input type="text" />
+      <Input type="text" value={value} onChange={onChange} />
     </Container>
   )
 }

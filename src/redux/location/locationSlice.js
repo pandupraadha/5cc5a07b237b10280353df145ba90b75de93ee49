@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-  address: null,
+  address: "Forest Run",
   showModal: false
 }
 
