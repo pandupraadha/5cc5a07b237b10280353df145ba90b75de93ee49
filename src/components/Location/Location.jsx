@@ -2,6 +2,9 @@ import { MdExpandMore } from "react-icons/md"
 import styled from "styled-components"
 import { colors } from "../../helper/colors"
 import { ResetButton } from "../../helper/resetStyling"
+import { useSelector, useDispatch } from 'react-redux'
+import { openModal } from "../../redux/location/locationSlice"
+
 
 const Container = styled.div`
   display: flex;
@@ -31,13 +34,21 @@ const ValueButton = styled(ResetButton)`
 `
 
 const Location = () => {
+  const locationState = useSelector(state => state.location)
+  const dispatch = useDispatch()
+
+  function handleClick(){
+    console.log('alla');
+    dispatch(openModal())
+  }
+
   return (
     <Container>
       <Label>
         alamat pengantaran
       </Label>
-      <ValueButton >
-        Tokopedia Tower <MdExpandMore size={20} color={colors.red} />
+      <ValueButton onClick={handleClick} >
+        {locationState.address} <MdExpandMore size={20} color={colors.red} />
       </ValueButton>
     </Container>
   )

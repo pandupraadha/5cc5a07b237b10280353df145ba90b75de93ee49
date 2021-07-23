@@ -97,10 +97,9 @@ const ContentCard = (props) => {
     let rating = data.rating
     
     for (let index = 0; index < 5; index++) {
-      console.log(rating);
-      if (rating > 1) star.push( <MdStar {...iconProps} /> )
-      else if (rating > 0) star.push( <MdStarHalf {...iconProps} /> )
-      else star.push( <MdStarBorder {...iconProps} /> )
+      if (rating > 1) star.push( <MdStar {...iconProps} key={index} /> )
+      else if (rating > 0) star.push( <MdStarHalf {...iconProps} key={index} /> )
+      else star.push( <MdStarBorder {...iconProps} key={index} /> )
       rating--
     }
 

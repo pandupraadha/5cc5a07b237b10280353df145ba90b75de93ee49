@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react"
+import { useSelector } from 'react-redux'
 import styled from "styled-components"
 import Type from "../../components/Type/Type"
 import Calendar from "../../container/Calendar/Calendar"
 import Content from "../../container/Content/Content"
+import Modal from "../../container/Modal/Modal"
 import TopNav from "../../container/TopNav/TopNav"
 
 const Container = styled.div`
@@ -22,6 +24,7 @@ const Top = styled.div`
 `
 
 const Home = () => {
+  const showLocation = useSelector(state => state.location.showModal)
   const [show, setShow] = useState(true)
   useEffect(() => {
     let prevScrollpos = window.pageYOffset;
@@ -47,6 +50,7 @@ const Home = () => {
       </Top>
 
       <Content />
+      <Modal show={showLocation} />
     </Container>
   )
 }
